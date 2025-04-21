@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Histórico de Consultas</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/Reset.css" />
   <link rel="stylesheet" href="css/HistoricoConsultas.css" />
 </head>
+
 <body>
-  <nav class="navbar p-3">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center gap-3 img-greeting">
-        <img src="img/logo.png" alt="Logo" class="logo-img">
-        <span class="navbar-brand mb-0 h5" id="greeting">Olá!</span>
-      </div>
-      <button class="btn btn-outline-light" title="Sair">
-        <i class="bi bi-box-arrow-right"></i>
-      </button>
+  <nav class="navbar d-flex justify-content-between">
+    <div class="d-flex align-items-center gap-4 img-greeting">
+      <img src="img/logo.png" alt="Logo" class="logo-img">
+      <span class="navbar-brand mb-0 h5" id="greeting">Olá!</span>
     </div>
+    <button class="btn btn-sair" title="Sair">
+      <img src="img/sair.png" alt="Sair" class="img-sair" />
+    </button>
   </nav>
 
   <div class="container my-4">
     <h3 class="mb-4">Histórico de consultas</h3>
 
     <div class="input-group mb-3">
-      <input type="text" class="form-control" id="searchInput" placeholder="Digite o nome do profissional ou paciente" />
-      <button class="btn btn-primary" onclick="filtrar()">Buscar</button>
+      <input type="text" class="form-control" id="searchInput"
+        placeholder="Digite o nome do profissional ou paciente" />
+      <button class="btn btn-primary btn-filtro">Buscar</button>
     </div>
 
     <div class="table-responsive">
@@ -36,13 +38,24 @@
       </table>
     </div>
 
-    <div class="d-flex justify-content-end gap-3 mt-4">
-      <button class="btn btn-outline-primary btn-voltar">Voltar</button>
-      <button class="btn btn-primary btn-detalhes">Detalhes</button>
-    </div>
-  </div>
+    <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap">
+      <!-- Centraliza a paginação -->
+      <div class="w-100 d-flex justify-content-center mb-2">
+        <div id="pagination" class="pagination"></div>
+      </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="/js/HistoricoConsultas.js"></script>
+      <!-- Botões alinhados à direita -->
+      <div class="w-100 d-flex justify-content-end">
+        <div class="historico-btns d-flex gap-2">
+          <button class="btn btn-outline-primary btn-voltar">Voltar</button>
+          <button class="btn btn-primary btn-detalhes">Detalhes</button>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/HistoricoConsultas.js"></script>
 </body>
+
 </html>
