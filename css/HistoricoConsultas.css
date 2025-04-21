@@ -1,0 +1,41 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    background-color: #006FB6;
+}
+
+.navbar-brand,
+#greeting {
+    color: #fff;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+}
+
+.table thead {
+    background-color: #dee2e6;
+}
+
+.btn-cancelar {
+    color: #0072c6;
+    cursor: pointer;
+}
+
+.selected-row {
+    background-color: #0072c6;
+    color: white;
+}
+
+.btn-voltar,
+.btn-detalhes {
+    min-width: 120px;
+}
+
+input::placeholder {
+    color: #aaa;
+}
