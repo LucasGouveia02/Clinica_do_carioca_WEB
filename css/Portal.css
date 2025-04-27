@@ -1,0 +1,255 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Personalização do scroll */
+.user-info .info-consultas .consultas-itens::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.user-info .info-consultas .consultas-itens::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+.user-info .info-consultas .consultas-itens::-webkit-scrollbar-thumb {
+    background: #006FB6; 
+    border-radius: 4px; 
+}
+
+.user-info .info-consultas .consultas-itens::-webkit-scrollbar-thumb:hover {
+    background: #0056b3; 
+}
+
+/* header */
+.navbar {
+    height: 70px;
+    padding: 0%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #006FB6;
+}
+
+#greeting {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.navbar-brand,
+#greeting {
+    color: #fff;
+}
+
+.logo-img {
+    width: 70px;
+    height: 70px;
+}
+
+.btn-sair {
+    margin-right: 2%;
+}
+
+.btn-sair img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
+/* MAIN */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 263px);
+    width: 100vw;
+}
+
+/* user-info */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+    padding-left: 7%;
+}
+
+.user-info h1 {
+    color: #006FB6;
+    font-family: Poppins;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 81px;
+}
+
+.user-info .info {
+    display: flex;
+    flex-direction: row;
+    gap: 31px;
+    margin-bottom: 68px;
+}
+
+.user-info .info img {
+    width: 135px;
+    height: 135px;
+    margin-top: 16px;
+    margin-right: 10px;
+}
+
+.user-info .info .info-itens .user-name {
+    color: #000;
+    font-family: Poppins;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-bottom: 7px;
+}
+
+.user-info .info .info-itens .user-item {
+    color: #000;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 5px 0;
+}
+
+/* info-consultas */
+.user-info .info-consultas h2 {
+    color: #000;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.user-info .info-consultas .consultas-itens {
+    max-height: 150px; 
+    overflow-y: auto; 
+    padding-right: 10px;
+    width: 600px;
+}
+
+.user-info .info-consultas .consultas-item {
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 45px;
+}
+
+.user-info .info-consultas .consultas-item .span-blue {
+    color: #006FB6;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.user-info .info-consultas .consultas-item .span-black {
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+/* user-actions */
+.user-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    height: 100%;
+    gap: 44px;
+}
+
+.user-actions .btn-blue {
+    width: 226px;
+    height: 60px;
+    border-radius: 20px;
+    border: none;
+    background: #006FB6;
+    color: #ffffff;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.user-actions .btn-blue:hover {
+    background: #0056b3;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.user-actions .btn-cancel-consultation {
+    width: 226px;
+    height: 60px;
+    border-radius: 20px;
+    border: 2px solid #006FB6;
+    background: #ffffff;
+    color: #006FB6;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.user-actions .btn-cancel-consultation:hover {
+    transform: scale(1.09);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+/* footer */
+footer {
+    background-color: #ffffff;
+    width: 100%;
+    height: 193px;
+    display: flex;
+    flex-direction: row;
+    border-top: 2px solid #006FB6;
+}
+
+.box-footer {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box-footer h3 {
+    color: #006FB6;
+    font-family: Poppins;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.box-footer p {
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
