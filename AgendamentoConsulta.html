@@ -30,17 +30,31 @@
     <form class="form-grid">
       <div class="form-group">
         <label for="especialidade">Especialidade</label>
-        <select id="especialidade"></select>
+        <select id="especialidade">
+          <option value="Cardiologia">Cardiologia</option>
+          <option value="ClínicoGeral">Clínico Geral</option>
+          <option value="Dermatologia">Dermatologia</option>
+          <option value="Ginecologia">Ginecologia</option>
+          <option value="Pediatria">Pediatria</option>
+          <option value="Ortopedia">Ortopedia</option>
+        </select>
       </div>
   
       <div class="form-group">
         <label for="modalidade">Modalidade de consulta</label>
-        <select id="modalidade"></select>
+        <select id="modalidade">
+          <option value="Presencial">Presencial</option>
+          <option value="Distancia">À distância</option>
+        </select>
       </div>
   
       <div class="form-group">
         <label for="unidade">Unidade</label>
-        <select id="unidade"></select>
+        <select id="unidade">
+          <option value="ChácaraSantoAntônio">Unidade Chácara Santo Antônio</option>
+          <option value="Pinheiros">Unidade Pinheiros</option>
+          <option value="Luz">Unidade Luz</option>
+        </select>
       </div>
   
       <div class="form-group">
@@ -66,25 +80,9 @@
             <th>Horários disponíveis</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Dr. Rafael Monteiro</td>
-            <td>Clínico geral</td>
-            <td>CRM-SP 1234567</td>
-            <td>08:00 às 08:45</td>
-          </tr>
-          <tr class="selected">
-            <td>Dr. Rafael Monteiro</td>
-            <td>Clínico geral</td>
-            <td>CRM-SP 1234567</td>
-            <td>08:00 às 08:45</td>
-          </tr>
-          <tr>
-            <td>Dr. Rafael Monteiro</td>
-            <td>Clínico geral</td>
-            <td>CRM-SP 1234567</td>
-            <td>08:00 às 08:45</td>
-          </tr>
+        <tbody id="tabelaBody">
+          <!-- As linhas da tabela serão preenchidas dinamicamente com JavaScript -->
+          
         </tbody>
       </table>
     </div>
@@ -98,5 +96,7 @@
   
 
   <script src="js/agendamentoConsulta/animação.js"></script>
+  <script src="js/agendamentoConsulta/GetMedico.js"></script> 
+  <script src="js/agendamentoConsulta/AgendamentoConsulta.js"></script> 
 </body>
 </html>

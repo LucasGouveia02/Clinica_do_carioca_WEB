@@ -110,7 +110,7 @@ table {
 table th, table td {
   padding: 12px;
   text-align: center;
-  
+  color: black;
   font-size: 18px;
   font-family: 'Poppins', sans-serif;
 }
@@ -167,4 +167,8 @@ thead {
 
 .btn-back:hover, .btn-schedule:hover {
   opacity: 0.8;
+}
+
+#tabela-profissionais tbody tr.selecionado {
+  background-color: #d0ebff;
 }
