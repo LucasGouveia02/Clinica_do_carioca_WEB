@@ -1,0 +1,170 @@
+body{
+  background-color: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+  height: 70px;
+  padding: 0%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #006FB6;
+}
+
+#greeting {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.navbar-brand,
+#greeting {
+  color: #fff;
+}
+
+.logo-img {
+  width: 70px;
+  height: 70px;
+}
+
+.btn-sair {
+  margin-right: 2%;
+}
+
+.btn-sair img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.container {
+  padding: 40px;
+}
+
+.title{
+  color: #006FB6;
+  font-family: Poppins;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 40px;
+}
+
+.subtitle{
+  color: #006FB6;
+  font-family: Poppins;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 40px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label{
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  font-size: 18px;
+  margin-bottom: 1%;
+}
+
+.full-width {
+  grid-column: span 3;
+}
+
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  background-color: #e3e3e3;
+}
+
+textarea {
+  resize: none;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  padding: 12px;
+  text-align: center;
+  
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+}
+
+thead {
+  background-color: #e0e0e0;
+}
+
+#tabela-profissionais tbody tr {
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+#tabela-profissionais.active tbody tr {
+  height: auto;
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.selected {
+  background-color: #0070c0;
+  color: #fff;
+}
+
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.btn-back, .btn-schedule {
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid #0070c0;
+  cursor: pointer;
+}
+
+.btn-back {
+  background: white;
+  color: #0070c0;
+}
+
+.btn-schedule {
+  background: #0070c0;
+  color: white;
+}
+
+.btn-back:hover, .btn-schedule:hover {
+  opacity: 0.8;
+}
