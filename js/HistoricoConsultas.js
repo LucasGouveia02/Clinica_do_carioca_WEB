@@ -1,11 +1,12 @@
-const perfil = 'medico';
+const perfil = 'PACIENTE';
+// const perfil = 'MEDICO';
 const usuarioId = 1;
 const usuarioName = "Ana";
 
 const greeting = document.getElementById('greeting');
-const tableHeader = document.getElementById('tableHeader');
-const tableBody = document.getElementById('tableBody');
 const botaoBuscar = document.querySelector(".btn-filtro");
+const botaoDetalhes = document.querySelector(".btn-detalhes");
+var consultaIdLinhaSelecionada = null;
 let currentPage = 1;
 let totalPages = 0;
 let data = [];
@@ -15,7 +16,7 @@ fetchData();
 async function fetchData(page = 0) {
   try {
     let response;
-    if (perfil === 'medico') {
+    if (perfil === 'MEDICO') {
       response = await fetch(`http://localhost:8080/consulta/historico/medico?medicoId=${usuarioId}&page=${page}`);
     } else {
       response = await fetch(`http://localhost:8080/consulta/historico/paciente?pacienteId=${usuarioId}&page=${page}`);
@@ -31,13 +32,21 @@ async function fetchData(page = 0) {
 }
 
 function renderTabela() {
+  const tabela = document.querySelector('.divTable');
+  tabela.innerHTML = '';
+  tabela.innerHTML = `
+        <thead id="tableHeader"></thead>
+        <tbody id="tableBody"></tbody>
+        `;
+  const tableHeader = document.getElementById('tableHeader');
+  const tableBody = document.getElementById('tableBody');
   tableHeader.innerHTML = '';
   tableBody.innerHTML = '';
 
   const searchInput = document.getElementById('searchInput');
   greeting.innerText = `Olá, ${usuarioName}!`;
-  if (perfil === 'paciente') {
-    
+  if (perfil === 'PACIENTE') {
+
     searchInput.placeholder = 'Digite o nome do profissional';
     tableHeader.innerHTML = `
       <tr>
@@ -49,12 +58,19 @@ function renderTabela() {
       </tr>`;
     data.forEach((c, i) => {
       tableBody.innerHTML += `
-        <tr>
+        <tr data-id="${c.id}">
           <td>${c.medico}</td>
           <td>${c.especialidade}</td>
           <td>${c.status}</td>
           <td>${formatarData(c.dataConsulta)}</td>
-          <td><span class="btn-cancelar ${c.status === 'Cancelada' ? 'text-decoration-line-through' : ''}">Cancelar</span></td>
+          <td>
+            <span 
+              class="btn-cancelar ${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'text-decoration-line-through no-click' : ''}" 
+              style="${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'cursor: default;' : ''}"
+              onclick="cancelarConsulta(event, ${c.id})">
+              Cancelar
+            </span>
+          </td>
         </tr>`;
     });
   } else {
@@ -69,12 +85,19 @@ function renderTabela() {
       </tr>`;
     data.forEach((c, i) => {
       tableBody.innerHTML += `
-        <tr>
+        <tr data-id="${c.id}">
           <td>${c.paciente}</td>
           <td>${c.status}</td>
           <td>${c.modalidade}</td>
           <td>${formatarData(c.dataConsulta)}</td>
-          <td><span class="btn-cancelar ${c.status === 'Cancelada' ? 'text-decoration-line-through' : ''}">Cancelar</span></td>
+          <td>
+            <span 
+              class="btn-cancelar ${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'text-decoration-line-through no-click' : ''}" 
+              style="${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'cursor: default;' : ''}"
+              onclick="cancelarConsulta(event, ${c.id})">
+              Cancelar
+            </span>
+          </td>
         </tr>`;
     });
   }
@@ -88,8 +111,51 @@ function renderTabela() {
 
 function selecionarLinha(tr) {
   const linhas = tableBody.querySelectorAll('tr');
-  linhas.forEach(row => row.classList.remove('table-primary'));
-  tr.classList.add('table-primary');
+  linhas.forEach(row => row.classList.remove('table-primary')); // Remove a classe de todas as linhas
+  tr.classList.add('table-primary'); // Adiciona a classe à linha clicada
+
+  consultaIdLinhaSelecionada = tr.getAttribute('data-id');
+}
+
+async function cancelarConsulta(event, consultaId) {
+  const span = event.target;
+  const tr = span.closest('tr');
+  selecionarLinha(tr);
+
+  // Verifica se o elemento possui a classe 'no-click'
+  if (span.classList.contains('no-click')) {
+    return;
+  }
+
+  // Usa setTimeout para permitir que o DOM seja atualizado antes de exibir o confirm
+  setTimeout(() => {
+    const confirmacao = confirm('Tem certeza de que deseja cancelar esta consulta?');
+    if (!confirmacao) return;
+
+    // Continua com a lógica de cancelamento após o confirm
+    cancelarConsultaBackend(consultaId);
+  }, 0);
+}
+
+async function cancelarConsultaBackend(consultaId) {
+  try {
+    const response = await fetch(`http://localhost:8080/consulta/cancelar?consultaId=${consultaId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Erro ao cancelar a consulta');
+    }
+
+    alert('Consulta cancelada com sucesso!');
+    fetchData();
+  } catch (error) {
+    console.error('Erro ao cancelar a consulta:', error);
+    alert('Erro ao cancelar a consulta. Tente novamente.');
+  }
 }
 
 function setupPagination() {
@@ -112,13 +178,14 @@ function setupPagination() {
 }
 
 botaoBuscar.addEventListener("click", function () {
-  filtrarProdutos();
+  filtrarUsuario();
+});
+botaoDetalhes.addEventListener("click", function () {
+  exibirDetalhes();
 });
 
-function filtrarProdutos() {
-  var filtro = document.getElementById('filtro').value.toUpperCase();
-
-  console.log(filtro);
+function filtrarUsuario() {
+  var filtro = document.querySelector('.filtro').value.toUpperCase();
 
   // Se o filtro estiver vazio, busca os produtos normalmente
   if (!filtro) {
@@ -128,44 +195,112 @@ function filtrarProdutos() {
 
   async function fetchFilteredData(page = 0) {
     try {
-      const response = await fetch(`http://localhost:8084/product/listByNameAndStoreId?name=${filtro}&storeId=${storeId}&page=${page}`);
+
+      let response, perfilUsuario;
+      if (perfil === 'MEDICO') {
+        response = await fetch(`http://localhost:8080/consulta/historico/medico/nomePaciente?nomePaciente=${filtro}&medicoId=${usuarioId}&page=${page}`);
+        perfilUsuario = "PACIENTE";
+      } else {
+        response = await fetch(`http://localhost:8080/consulta/historico/paciente/nomeMedico?nomeMedico=${filtro}&pacienteId=${usuarioId}&page=${page}`);
+        perfilUsuario = "MÉDICO";
+      }
 
       // Se a API retornar 404, exibe a mensagem de produto não encontrado
       if (response.status === 404) {
-        exibirMensagemProdutoNaoEncontrado();
+        exibirMensagemNaoEncontrado(perfilUsuario);
         return;
       }
 
       const result = await response.json();
-      if (result.products.length === 0) {
+      if (result.consultas.length === 0) {
         // Caso a lista de produtos retornada seja vazia, exibe mensagem de produto não encontrado
-        exibirMensagemProdutoNaoEncontrado();
+        exibirMensagemNaoEncontrado(perfilUsuario);
       } else {
-        data = result.products; // Armazena os produtos filtrados
+        data = result.consultas; // Armazena os produtos filtrados
         totalPages = result.totalPages; // Armazena o número total de páginas para os produtos filtrados
-        displayTableData(); // Exibe os dados filtrados
+        renderTabela(); // Exibe os dados filtrados
         setupPagination(); // Configura a paginação para os dados filtrados
       }
     } catch (error) {
       console.error('Erro ao buscar dados filtrados:', error);
-      exibirMensagemProdutoNaoEncontrado(); // Exibe mensagem em caso de erro
+      exibirMensagemNaoEncontrado(perfilUsuario);
     }
   }
 
-  fetchFilteredData(); // Chama a função para buscar os produtos filtrados
+  fetchFilteredData();
 }
 
-function exibirMensagemProdutoNaoEncontrado() {
+function exibirMensagemNaoEncontrado(perfilUsuario) {
   const tabela = document.querySelector('.divTable');
   tabela.innerHTML = `
-      <div class="produto-nao-encontrado">
-          <p>PRODUTO NÃO ENCONTRADO!</p>
+      <div class="nao-encontrado">
+          <p>${perfilUsuario} NÃO ENCONTRADO!</p>
           <img src="../img/not-found.png" alt="Produto não encontrado" width="200">
       </div>
   `;
 
   const pagination = document.getElementById('pagination');
   pagination.innerHTML = ''; // Limpa a paginação quando não houver resultados
+}
+
+function exibirDetalhes() {
+  const linhasSelecionadas = document.querySelectorAll('.table-primary');
+  if (linhasSelecionadas.length === 0) {
+    alert('Selecione uma linha para ver os detalhes!');
+    return;
+  }
+
+  showDetalhesModal(consultaIdLinhaSelecionada);
+}
+
+async function showDetalhesModal(consultaId) {
+  const modal = document.getElementById('detalhesModal');
+  const modalContent = document.querySelector('.modal-content'); // Elemento onde os detalhes serão exibidos
+
+  try {
+    const response = await fetch(`http://localhost:8080/consulta/detalhe?consultaId=${consultaId}`);
+    if (!response.ok) {
+      throw new Error('Erro ao buscar detalhes da consulta');
+    }
+
+    const detalhes = await response.json();
+
+    // Monta o conteúdo do modal com os detalhes da consulta
+    modalContent.innerHTML = `
+      <div class="header-modal-detalhes">
+        <h3>Detalhes da consulta</h3>  
+        <span class="close">&times;</span>
+      </div>
+      <p style="margin-bottom: 16px;"><strong>Status:</strong> ${detalhes.statusConsulta}</p>
+      <p style="margin-bottom: 16px;"><strong>Paciente:</strong> ${detalhes.paciente}</p>
+      <p style="margin-bottom: 16px;"><strong>Data:</strong> ${formatarData(detalhes.dataConsulta)}</p>
+      <p style="margin-bottom: 16px;"><strong>Profissional:</strong> ${detalhes.medico}</p>
+      <p style="margin-bottom: 16px;"><strong>Observação do paciente:</strong> ${detalhes.observacaoPaciente}</p>
+      <p style="margin-bottom: 16px;"><strong>Observação do médico:</strong> ${detalhes.observacaoMedico}</p>
+      <p style="margin-bottom: 16px;"><strong>Unidade:</strong> ${detalhes.unidade}</p>
+      <p style="margin-bottom: 16px;"><strong>Modalidade:</strong> ${detalhes.modalidade}</p>
+`;
+
+    // Exibe o modal
+    modal.style.display = 'block';
+
+    const closeBtn = document.getElementsByClassName('close')[0];
+    // Configura o botão de fechar
+    closeBtn.onclick = function () {
+      modal.style.display = 'none';
+    };
+
+    // Fecha o modal ao clicar fora dele
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    };
+  } catch (error) {
+    console.error('Erro ao buscar detalhes da consulta:', error);
+    modalContent.innerHTML = `<p>Erro ao carregar os detalhes da consulta.</p>`;
+    modal.style.display = 'block';
+  }
 }
 
 function formatarData(dataBackend) {
