@@ -6,6 +6,7 @@ const usuarioName = "Ana";
 const greeting = document.getElementById('greeting');
 const botaoBuscar = document.querySelector(".btn-filtro");
 const botaoDetalhes = document.querySelector(".btn-detalhes");
+const botaoVoltar = document.querySelector(".btn-voltar");
 var consultaIdLinhaSelecionada = null;
 let currentPage = 1;
 let totalPages = 0;
@@ -180,8 +181,13 @@ function setupPagination() {
 botaoBuscar.addEventListener("click", function () {
   filtrarUsuario();
 });
+
 botaoDetalhes.addEventListener("click", function () {
   exibirDetalhes();
+});
+
+botaoVoltar.addEventListener("click", function () {
+  window.location.href = "PortalPacienteMedico.html";
 });
 
 function filtrarUsuario() {
