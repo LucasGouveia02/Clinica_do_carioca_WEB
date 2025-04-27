@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/agendamentoConsulta/style.css">
+  <link rel="stylesheet" href="css/Reset.css" />
+  <title>Agendamento de Consulta</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar d-flex justify-content-between">
+      <div class="d-flex align-items-center gap-4 img-greeting">
+          <img src="img/logo.png" alt="Logo" class="logo-img">
+          <span class="navbar-brand mb-0 h5" id="greeting">Olá, Jefferson!</span>
+      </div>
+      <button class="btn btn-sair" title="Sair">
+          <img src="img/sair.png" alt="Sair" class="img-sair" />
+      </button>
+  </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="title">Agende sua consulta</h1>
+  
+    <form class="form-grid">
+      <div class="form-group">
+        <label for="especialidade">Especialidade</label>
+        <select id="especialidade"></select>
+      </div>
+  
+      <div class="form-group">
+        <label for="modalidade">Modalidade de consulta</label>
+        <select id="modalidade"></select>
+      </div>
+  
+      <div class="form-group">
+        <label for="unidade">Unidade</label>
+        <select id="unidade"></select>
+      </div>
+  
+      <div class="form-group">
+        <label for="data">Data da consulta</label>
+        <input type="date" id="data">
+      </div>
+  
+      <div class="form-group full-width">
+        <label for="observacoes">Observações</label>
+        <textarea id="observacoes" rows="3"></textarea>
+      </div>
+    </form>
+  
+    <h2 class="subtitle">Profissionais disponíveis</h2>
+  
+    <div class="table-container">
+      <table id="tabela-profissionais">
+        <thead>
+          <tr>
+            <th>Profissional</th>
+            <th>Especialidade</th>
+            <th>CRM</th>
+            <th>Horários disponíveis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dr. Rafael Monteiro</td>
+            <td>Clínico geral</td>
+            <td>CRM-SP 1234567</td>
+            <td>08:00 às 08:45</td>
+          </tr>
+          <tr class="selected">
+            <td>Dr. Rafael Monteiro</td>
+            <td>Clínico geral</td>
+            <td>CRM-SP 1234567</td>
+            <td>08:00 às 08:45</td>
+          </tr>
+          <tr>
+            <td>Dr. Rafael Monteiro</td>
+            <td>Clínico geral</td>
+            <td>CRM-SP 1234567</td>
+            <td>08:00 às 08:45</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  
+    <div class="buttons">
+      <button class="btn-back">Voltar</button>
+      <button class="btn-schedule">Agendar</button>
+    </div>
+  </main>
+  
+
+  <script src="js/agendamentoConsulta/animação.js"></script>
+</body>
+</html>
