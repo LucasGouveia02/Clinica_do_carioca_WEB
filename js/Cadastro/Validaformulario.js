@@ -26,4 +26,3 @@ function aplicarMascaraCPF(event) {
 
 // Adiciona os eventos de máscara nos campos de telefone e CPF
 document.getElementById('telefone').addEventListener('input', aplicarMascaraTelefone);
-document.getElementById('cpf').addEventListener('input', aplicarMascaraCPF);
