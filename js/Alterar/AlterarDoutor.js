@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const confirmaSenha = document.getElementById('confirmaSenha').value.trim();
 
         // Validação simples
-        if (!nome || !crm || !especialidade || !telefone || !email || !senha || !confirmaSenha) {
+        if (!nome || !crm || !especialidade || !telefone || !email) {
             alert('Por favor, preencha todos os campos.');
             return;
         }
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const dadosMedico = {
-            id: 1, // Mantendo o id fixo para edição
+            id: 2, // Mantendo o id fixo para edição
             name: nome,
             crm: crm,
             especialidade: especialidade,
