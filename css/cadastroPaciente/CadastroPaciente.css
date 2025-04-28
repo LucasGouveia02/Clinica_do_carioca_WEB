@@ -1,0 +1,40 @@
+body {
+    background: #fff;
+    padding: 40px;
+}
+
+.form-section {
+    border-top: 2px solid #0077cc;
+    margin-top: 20px;
+    padding-top: 30px;
+}
+
+.form-control {
+    width: 60%;
+    height: 40px;
+    font-size: 0.9rem;
+    padding: 6px 10px; 
+}
+
+.btn-outline-primary-custom {
+    color: #0077cc;
+    border-color: #0077cc;
+    border-radius: 15px;
+}
+
+.btn-outline-primary-custom:hover {
+    background-color: #0077cc;
+    color: white;
+}
+
+.btn-primary-custom {
+    background-color: #0077cc;
+    border: none;
+    border-radius: 15px;
+    color: white;
+}
+
+.btn-primary-custom:hover {
+    background-color: #005fa3;
+    
+}
