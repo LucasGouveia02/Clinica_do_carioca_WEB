@@ -1,26 +1,26 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('AlterarDoutorForm');
+    const form = document.getElementById('AlterarPacienteForm');
 
-    // Função para buscar os dados do médico e preencher o formulário
-    function carregarDadosMedico() {
-        fetch('http://localhost:8080/medico/2')
+    // Função para buscar os dados do Paciente e preencher o formulário
+    function carregarDadosPaciente() {
+        fetch('http://localhost:8080/paciente/1')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Erro ao buscar dados do médico.');
+                    throw new Error('Erro ao buscar dados do Paciente.');
                 }
                 return response.json();
             })
             .then(data => {
                 console.log(data); // Para depuração
-                document.getElementById('nome').value = data.name || '';
-                document.getElementById('especialidade').value = data.especialidade || '';
+                document.getElementById('nome').value = data.nome || '';
+                document.getElementById('cpf').value = data.cpf || '';
                 document.getElementById('telefone').value = data.telefone || '';
                 document.getElementById('email').value = data.email || '';
-                document.getElementById('crm').value = data.crm || '';
+                document.getElementById('nascimento').value = data.dataNascimento || '';
             })
             .catch(error => {
                 console.error('Erro:', error);
-                alert('Erro ao carregar dados do médico.');
+                alert('Erro ao carregar dados do Paciente.');
             });
     }
 
@@ -29,15 +29,13 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         const nome = document.getElementById('nome').value.trim();
-        const crm = document.getElementById('crm').value.trim();
-        const especialidade = document.getElementById('especialidade').value.trim();
         const telefone = document.getElementById('telefone').value.trim();
         const email = document.getElementById('email').value.trim();
         const senha = document.getElementById('senha').value.trim();
         const confirmaSenha = document.getElementById('confirmaSenha').value.trim();
 
         // Validação simples
-        if (!nome || !crm || !especialidade || !telefone || !email) {
+        if (!nome || !telefone || !email) {
             alert('Por favor, preencha todos os campos.');
             return;
         }
@@ -47,24 +45,22 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const dadosMedico = {
-            id: 2, // Mantendo o id fixo para edição
+        const dadosPaciente = {
+            id: 3, // Mantendo o id fixo para edição
             nome: nome,
-            crm: crm,
-            especialidade: especialidade,
             telefone: telefone,
             email: email,   
         };
         if(senha) {
-            dadosMedico.senha = senha;
+            dadosPaciente.senha = senha;
         }
-        // console.log(dadosMedico);
-        fetch('http://localhost:8080/alteracao/medico', {
+        // console.log(dadosPaciente);
+        fetch('http://localhost:8080/alteracao/paciente', {
             method: 'PATCH', // ou POST, dependendo de como seu back-end está esperando
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(dadosMedico)
+            body: JSON.stringify(dadosPaciente)
         })
         .then(response => {
             if (!response.ok) {
@@ -84,5 +80,5 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Chama a função para carregar os dados ao abrir a página
-    carregarDadosMedico();
+    carregarDadosPaciente();
 });
