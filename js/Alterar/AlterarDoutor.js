@@ -1,9 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('AlterarDoutorForm');
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const id = userData.id; 
+    const nome = userData.nome.toLowerCase();
 
+    console.log(id); // Para depuração  
+    console.log(nome); // Para depuração  
     // Função para buscar os dados do médico e preencher o formulário
     function carregarDadosMedico() {
-        fetch('http://localhost:8080/medico/1')
+        fetch('http://localhost:8080/' + nome + '/' + id)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao buscar dados do médico.');
@@ -48,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const dadosMedico = {
-            id: 2, // Mantendo o id fixo para edição
+            id: id, // Mantendo o id fixo para edição
             nome: nome,
             crm: crm,
             especialidade: especialidade,
@@ -58,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if(senha) {
             dadosMedico.senha = senha;
         }
+        
         // console.log(dadosMedico);
         fetch('http://localhost:8080/alteracao/medico', {
             method: 'PATCH', // ou POST, dependendo de como seu back-end está esperando
@@ -74,15 +80,17 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(data => {
             alert('Dados atualizados com sucesso!');
-            // Você pode redirecionar para outra página se quiser
-            // window.location.href = "/alguma-pagina.html";
+            window.location.href = "PortalPacienteMedico.html"; // Redireciona para a página inicial após a atualização
         })
         .catch(error => {
             console.error('Erro:', error);
             alert('Erro ao atualizar dados.');
         });
     });
-
-    // Chama a função para carregar os dados ao abrir a página
+    document.getElementById('cancelar').addEventListener('click', function () {
+        console.log('cancelar');
+        window.location.href = 'PortalPacienteMedico.html'; 
+    });
+   
     carregarDadosMedico();
 });

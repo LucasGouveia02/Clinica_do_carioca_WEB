@@ -53,4 +53,10 @@ document.getElementById('cadastroPacienteForm').addEventListener('submit', async
         console.error('Erro na requisição:', error);
         alert('Erro ao cadastrar paciente. Tente novamente mais tarde.');
     }
+    
+});
+
+document.getElementById('cancelar').addEventListener('click', function () {
+    window.location.href = 'PortalPacienteMedico.html';
+    console.log('medico cancelar');
 });

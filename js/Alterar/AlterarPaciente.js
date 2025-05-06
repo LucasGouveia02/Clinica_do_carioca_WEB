@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('AlterarPacienteForm');
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const id = userData.id; 
+    const nome = userData.nome.toLowerCase();
 
     // Função para buscar os dados do Paciente e preencher o formulário
     function carregarDadosPaciente() {
-        fetch('http://localhost:8080/paciente/1')
+        fetch('http://localhost:8080/paciente/'+ id)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao buscar dados do Paciente.');
@@ -46,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const dadosPaciente = {
-            id: 3, // Mantendo o id fixo para edição
+            id: id, // Mantendo o id fixo para edição
             nome: nome,
             telefone: telefone,
             email: email,   
@@ -70,15 +73,16 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(data => {
             alert('Dados atualizados com sucesso!');
-            // Você pode redirecionar para outra página se quiser
-            // window.location.href = "/alguma-pagina.html";
+            window.location.href = "PortalPacienteMedico.html";
         })
         .catch(error => {
             console.error('Erro:', error);
             alert('Erro ao atualizar dados.');
         });
     });
-
-    // Chama a função para carregar os dados ao abrir a página
+    document.getElementById('cancelar').addEventListener('click', function () {
+        console.log('cancelar');
+        window.location.href = 'PortalPacienteMedico.html'; 
+    });
     carregarDadosPaciente();
 });
