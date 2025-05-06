@@ -1,7 +1,7 @@
-// const perfil = 'PACIENTE';
-const perfil = 'MEDICO';
-const usuarioId = 1;
-const usuarioName = "Ana";
+const userData = JSON.parse(localStorage.getItem('userData'));
+const perfil = userData.perfil;
+const usuarioId = userData.id;
+const usuarioName = userData.nome;
 
 const greeting = document.getElementById('greeting');
 const botaoBuscar = document.querySelector(".btn-filtro");

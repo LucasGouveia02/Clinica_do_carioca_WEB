@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(nome); // Para depuração  
     // Função para buscar os dados do médico e preencher o formulário
     function carregarDadosMedico() {
+ fix/ajustes_cadastro-alteracao
         fetch('http://localhost:8080/' + nome + '/' + id)
+
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao buscar dados do médico.');
