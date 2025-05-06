@@ -18,7 +18,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             console.log('Login bem-sucedido:', data);
             localStorage.setItem('userData', JSON.stringify(data));
             alert('Login realizado com sucesso!');
-            window.location.href = '';
+            window.location.href = 'PortalPacienteMedico.html';
         } else {
             alert('Erro ao realizar login. Verifique suas credenciais.');
         }

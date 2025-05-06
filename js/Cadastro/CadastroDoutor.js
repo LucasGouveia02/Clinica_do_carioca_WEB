@@ -43,6 +43,7 @@ document.getElementById('cadastroDoutorForm').addEventListener('submit', async f
             alert('Doutor cadastrado com sucesso!');
             // Opcional: Redirecionar ou limpar o formulário
             document.getElementById('cadastroDoutorForm').reset();
+            window.location.href = 'Login.html';
         } else {
             const errorData = await response.json();
             alert('Erro ao cadastrar doutor: ' + errorData.message);

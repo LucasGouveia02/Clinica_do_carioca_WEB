@@ -44,6 +44,7 @@ document.getElementById('cadastroPacienteForm').addEventListener('submit', async
             alert('Paciente cadastrado com sucesso!');
             // Opcional: Redirecionar ou limpar o formulário
             document.getElementById('cadastroPacienteForm').reset();
+            window.location.href = 'Login.html';
         } else {
             const errorData = await response.json();
             alert('Erro ao cadastrar paciente: ' + errorData.message);

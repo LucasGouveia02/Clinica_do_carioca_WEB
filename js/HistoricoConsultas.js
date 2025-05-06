@@ -1,5 +1,5 @@
-const perfil = 'PACIENTE';
-// const perfil = 'MEDICO';
+// const perfil = 'PACIENTE';
+const perfil = 'MEDICO';
 const usuarioId = 1;
 const usuarioName = "Ana";
 
