@@ -8,6 +8,7 @@ document.getElementById('cadastroDoutorForm').addEventListener('submit', async f
     const telefone = document.getElementById('telefone').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
+    
 
     // Cria o objeto para enviar
     const doutorData = {
@@ -28,6 +29,7 @@ document.getElementById('cadastroDoutorForm').addEventListener('submit', async f
     if (!validarSenha(senha)) {
         return;
     }
+    
 
     try {
         // Envia a requisição para o backend
@@ -52,4 +54,9 @@ document.getElementById('cadastroDoutorForm').addEventListener('submit', async f
         console.error('Erro na requisição:', error);
         alert('Erro ao cadastrar doutor. Tente novamente mais tarde.');
     }
+});
+
+document.getElementById('cancelar').addEventListener('click', function () {
+    window.location.href = 'PortalPacienteMedico.html'; // Redireciona para a página desejada
+    console.log('cancelar');
 });
