@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para buscar os dados do médico e preencher o formulário
     function carregarDadosMedico() {
-        fetch('http://localhost:8080/medico/1')
+        fetch('http://localhost:8080/medico/3')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao buscar dados do médico.');
