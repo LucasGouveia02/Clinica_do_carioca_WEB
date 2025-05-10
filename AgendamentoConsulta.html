@@ -16,7 +16,7 @@
     <nav class="navbar d-flex justify-content-between">
       <div class="d-flex align-items-center gap-4 img-greeting">
           <img src="img/logo.png" alt="Logo" class="logo-img">
-          <span class="navbar-brand mb-0 h5" id="greeting">Olá, Jefferson!</span>
+          <span class="navbar-brand mb-0 h5" id="greeting">Olá</span>
       </div>
       <button class="btn btn-sair" title="Sair">
           <img src="img/sair.png" alt="Sair" class="img-sair" />
@@ -31,6 +31,7 @@
       <div class="form-group">
         <label for="especialidade">Especialidade</label>
         <select id="especialidade">
+          <option value="">Selecione uma especialidade</option>
           <option value="Cardiologia">Cardiologia</option>
           <option value="ClínicoGeral">Clínico Geral</option>
           <option value="Dermatologia">Dermatologia</option>
@@ -81,8 +82,6 @@
           </tr>
         </thead>
         <tbody id="tabelaBody">
-          <!-- As linhas da tabela serão preenchidas dinamicamente com JavaScript -->
-          
         </tbody>
       </table>
     </div>
