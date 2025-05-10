@@ -20,13 +20,9 @@ function preencherFormulario(data) {
 }
 
 window.onload = function () {
-  const consultaId = 1; // ou de onde estiver vindo
+  const consultaId = 4; // ou de onde estiver vindo
   carregarDetalhesConsulta(consultaId);
 };
-
-function directToHistory() {
-  window.location.href = "HistoricoConsultas.html";
-}
 
 async function salvarObservacao(consultaId) {
   const observacao = document.getElementById('observacoesMedico').value;
