@@ -178,7 +178,7 @@ main {
 }
 
 .user-actions .btn-blue {
-    width: 226px;
+    width: 260px;
     height: 60px;
     border-radius: 20px;
     border: none;
@@ -197,7 +197,7 @@ main {
     cursor: pointer;
 }
 
-.user-actions .btn-cancel-consultation {
+/* .user-actions .btn-cancel-consultation {
     width: 226px;
     height: 60px;
     border-radius: 20px;
@@ -215,7 +215,7 @@ main {
     transform: scale(1.09);
     transition: all 0.3s ease-in-out;
     cursor: pointer;
-}
+} */
 
 /* footer */
 footer {
