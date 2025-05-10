@@ -24,6 +24,10 @@ window.onload = function () {
   carregarDetalhesConsulta(consultaId);
 };
 
+function directToHistory() {
+  window.location.href = "HistoricoConsultas.html";
+}
+
 async function salvarObservacao(consultaId) {
   const observacao = document.getElementById('observacoesMedico').value;
 

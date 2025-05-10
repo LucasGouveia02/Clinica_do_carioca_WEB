@@ -21,7 +21,7 @@ function buscarMedicosPorEspecialidade(especialidade) {
       })
       .then(medicos => {
           atualizarTabelaProfissionais(medicos);
-          console.log(medicos); // Adicionei o console.log aqui para verificar os dados recebidos
+          console.log(medicos);
       })
       .catch(error => {
           tabelaBody.innerHTML = ''; 
@@ -31,7 +31,7 @@ function buscarMedicosPorEspecialidade(especialidade) {
 
 function atualizarTabelaProfissionais(medicos) {
   
-  tabelaBody.innerHTML = ''; // Limpa a tabela
+  tabelaBody.innerHTML = '';
 
   if (medicos.length === 0) {
       tabelaBody.innerHTML = '<tr><td colspan="4">Nenhum profissional encontrado.</td></tr>';
