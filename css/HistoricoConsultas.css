@@ -49,7 +49,7 @@ body {
     background-color: #dee2e6;
 }
 
-.btn-cancelar {
+.btn-cancelar, .btn-editar {
     color: #0072c6;
     cursor: pointer;
 }
@@ -60,6 +60,10 @@ body {
 }
 
 .table-primary .btn-cancelar {
+    color: white !important;
+}
+
+.table-primary .btn-editar {
     color: white !important;
 }
 

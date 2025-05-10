@@ -56,6 +56,7 @@ function renderTabela() {
         <th style="background-color: #D9D9D9;">Status</th>
         <th style="background-color: #D9D9D9;">Data da consulta</th>
         <th style="background-color: #D9D9D9;">Ação</th>
+        <th style="background-color: #D9D9D9;">Ação</th>
       </tr>`;
     data.forEach((c, i) => {
       tableBody.innerHTML += `
@@ -70,6 +71,14 @@ function renderTabela() {
               style="${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'cursor: default;' : ''}"
               onclick="cancelarConsulta(event, ${c.id})">
               Cancelar
+            </span>
+          </td>
+          <td>
+            <span 
+              class="btn-editar ${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'text-decoration-line-through no-click' : ''}" 
+              style="${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'cursor: default;' : ''}"
+              onclick="editarConsulta()">
+              Editar
             </span>
           </td>
         </tr>`;
@@ -110,6 +119,9 @@ function renderTabela() {
   });
 }
 
+function editarConsulta() {
+  window.location.href = "ObsConsultaMedico.html";
+}
 function selecionarLinha(tr) {
   const linhas = tableBody.querySelectorAll('tr');
   linhas.forEach(row => row.classList.remove('table-primary')); // Remove a classe de todas as linhas
