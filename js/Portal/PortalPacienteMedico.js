@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const perfil = userData.perfil;
     const usuarioId = userData.id;
 
-    // Seleciona os elementos necessários
     const elementos = {
         btnAgenda: document.querySelector(".btn-1"),
         btnHistorico: document.querySelector(".btn-2"),
@@ -15,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
         telefoneOuEspecialidade: document.querySelector(".user-item-2")
     };
 
-    // Chama a função para buscar os dados do usuário
     buscarDadosUsuario(perfil, usuarioId, elementos);
+    buscarConsutas(0, perfil, usuarioId);
 });
 
 function buscarDadosUsuario(perfil, usuarioId, elementos) {
@@ -90,13 +89,62 @@ function exibirDadosUsuario(dadosUsuario, perfil, elementos) {
     }
 }
 
+async function buscarConsutas(page = 0, perfil, usuarioId) {
+    try {
+        let response;
+        if (perfil === 'MEDICO') {
+            response = await fetch(`http://localhost:8080/consulta/historico/medico?medicoId=${usuarioId}&page=${page}`);
+        } else {
+            response = await fetch(`http://localhost:8080/consulta/historico/paciente?pacienteId=${usuarioId}&page=${page}`);
+        }
+        const result = await response.json();
+        data = result.consultas;
+        
+        exibirConsutas(data, perfil);
+        console.log(data);
+    } catch (error) {
+        console.error('Erro ao buscar dados:', error);
+    }
+}
+
+function exibirConsutas(consultas, perfil) {
+    const listaConsultas = document.querySelector(".consultas-itens");
+
+    listaConsultas.innerHTML = "";
+
+    consultas.forEach(consulta => {
+        
+        const consultaItem = document.createElement("p");
+        consultaItem.classList.add("consultas-item");
+
+        const [data, hora] = consulta.dataConsulta.split(" "); 
+        const [ano, mes, dia] = data.split("-"); 
+        const horaFormatada = hora.substring(0, 5); 
+
+        if (perfil === "PACIENTE") {
+            consultaItem.innerHTML = `
+                <span class="span-blue">Consulta</span> com 
+                <span class="span-black">Dr. ${consulta.medico}</span> 
+                dia ${dia}/${mes}/${ano} às ${horaFormatada}
+            `;
+        } else {
+            consultaItem.innerHTML = `
+                <span class="span-blue">Consulta</span> com paciente
+                <span class="span-black">${consulta.paciente}</span> 
+                dia ${dia}/${mes}/${ano} às ${horaFormatada}
+            `;
+        }
+
+        listaConsultas.appendChild(consultaItem);
+    });
+}
+
 function calcularIdade(dataNascimento) {
     const hoje = new Date();
     const nascimento = new Date(dataNascimento);
 
     let idade = hoje.getFullYear() - nascimento.getFullYear();
 
-    // Verifica se a data de aniversário já ocorreu este ano
     const mesAtual = hoje.getMonth();
     const diaAtual = hoje.getDate();
     const mesNascimento = nascimento.getMonth();
