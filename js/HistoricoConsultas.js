@@ -120,7 +120,8 @@ function renderTabela() {
   });
 }
 
-function editarConsulta() {
+function editarConsulta(event, consultaId) {
+  localStorage.setItem('consultaIdSelecionada', consultaId);
   window.location.href = "ObsConsultaMedico.html";
 }
 function selecionarLinha(tr) {
