@@ -56,7 +56,6 @@ function renderTabela() {
         <th style="background-color: #D9D9D9;">Status</th>
         <th style="background-color: #D9D9D9;">Data da consulta</th>
         <th style="background-color: #D9D9D9;">Ação</th>
-        <th style="background-color: #D9D9D9;">Ação</th>
       </tr>`;
     data.forEach((c, i) => {
       tableBody.innerHTML += `
@@ -73,14 +72,7 @@ function renderTabela() {
               Cancelar
             </span>
           </td>
-          <td>
-            <span 
-              class="btn-editar ${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'text-decoration-line-through no-click' : ''}" 
-              style="${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'cursor: default;' : ''}"
-              onclick="editarConsulta()">
-              Editar
-            </span>
-          </td>
+          
         </tr>`;
     });
   } else {
@@ -91,6 +83,7 @@ function renderTabela() {
         <th style="background-color: #D9D9D9;">Status</th>
         <th style="background-color: #D9D9D9;">Modalidade</th>
         <th style="background-color: #D9D9D9;">Data da consulta</th>
+        <th style="background-color: #D9D9D9;">Ação</th>
         <th style="background-color: #D9D9D9;">Ação</th>
       </tr>`;
     data.forEach((c, i) => {
@@ -108,6 +101,14 @@ function renderTabela() {
               Cancelar
             </span>
           </td>
+          <td>
+            <span 
+              class="btn-editar ${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'text-decoration-line-through no-click' : ''}" 
+              style="${(c.status === 'Cancelada' || c.status === 'Concluída' || c.status === 'Finalizada') ? 'cursor: default;' : ''}"
+              onclick="editarConsulta(event, ${c.id})">
+              Editar
+            </span>
+          </td>
         </tr>`;
     });
   }
@@ -119,7 +120,8 @@ function renderTabela() {
   });
 }
 
-function editarConsulta() {
+function editarConsulta(event, consultaId) {
+  localStorage.setItem('consultaIdSelecionada', consultaId);
   window.location.href = "ObsConsultaMedico.html";
 }
 function selecionarLinha(tr) {

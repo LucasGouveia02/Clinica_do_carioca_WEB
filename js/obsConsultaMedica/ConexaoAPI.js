@@ -20,19 +20,21 @@ function preencherFormulario(data) {
 }
 
 window.onload = function () {
-  const consultaId = 1; // ou de onde estiver vindo
-  carregarDetalhesConsulta(consultaId);
+  const consultaId = localStorage.getItem('consultaIdSelecionada');
+  console.log("Consulta ID selecionada:", consultaId);
+  if (consultaId) {
+    carregarDetalhesConsulta(consultaId);
+  } else {
+    alert('Nenhuma consulta selecionada!');
+  }
 };
-
-function directToHistory() {
-  window.location.href = "HistoricoConsultas.html";
-}
 
 async function salvarObservacao(consultaId) {
   const observacao = document.getElementById('observacoesMedico').value;
+  const status = document.getElementById('status').value;
 
   try {
-    const response = await fetch(`http://localhost:8080/consulta/add/observacao?consultaId=${consultaId}`, {
+    const response = await fetch(`http://localhost:8080/consulta/add/observacao?consultaId=${consultaId}&novoStatus=${encodeURIComponent(status)}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -41,13 +43,29 @@ async function salvarObservacao(consultaId) {
     });
 
     if (response.ok) {
-      alert("Observação salva com sucesso!");
+      alert("Alterações realizadas com sucesso!");
+      window.location.href = 'PortalPacienteMedico.html';
     } else {
       alert("Erro ao salvar observação.");
     }
   } catch (error) {
     console.error("Erro ao salvar observação:", error);
   }
+}
+
+const btnSalvarObservacao = document.querySelector('.btn-schedule');
+btnSalvarObservacao.addEventListener('click', function () {
+    const consultaId = localStorage.getItem('consultaIdSelecionada');
+    if (!consultaId) {
+        alert('Nenhuma consulta selecionada!');
+        return;
+    }
+
+    salvarObservacao(consultaId);
+});
+
+function voltar() {
+  window.location.href = 'PortalPacienteMedico.html';
 }
 
 
